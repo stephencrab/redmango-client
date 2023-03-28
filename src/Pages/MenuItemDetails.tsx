@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetMenuItemByIdQuery } from "../Apis/menuItemApi";
 import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
+import { MainLoader, MiniLoader } from "../Components/Page/Common";
 
 
 const MenuItemDetails = () => {
@@ -80,11 +81,17 @@ const MenuItemDetails = () => {
               </span>
               <div className="row pt-4">
                 <div className="col-5">
-                  <button className="btn btn-success form-control"
+                  {isAddingToCart ? (
+                    <button disabled className="btn btn-success form-control">
+                      <MiniLoader />
+                    </button>
+                  ) : (
+                    <button className="btn btn-success form-control"
                     onClick={() => handleAddingToCart()}
-                  >
-                    Add to Cart
-                  </button>
+                    >
+                      Add to Cart
+                    </button>
+                  )}                 
                 </div>
     
                 <div className="col-5 ">
@@ -109,7 +116,7 @@ const MenuItemDetails = () => {
             <div className="d-flex justify-content-center"
                 style={{width: "100%"}}
             >
-                <div>Loading...</div>
+                <MainLoader />
             </div>
         )}     
     </div>
