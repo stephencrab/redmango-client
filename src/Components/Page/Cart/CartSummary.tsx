@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateShoppingCartMutation } from "../../../Apis/shoppingCartApi";
-import { cartItemModel } from "../../../Interfaces";
+import { cartItemModel, userModel } from "../../../Interfaces";
 import {
   removeFromCart,
   updateQuantity,
@@ -16,13 +16,17 @@ const CartSummary = () => {
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
 
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
+
   const handleQuantity = (updateQuantityBy: number, cartItem: cartItemModel) => {
     if ((updateQuantityBy == -1 && cartItem.quantity == 1) || updateQuantityBy == 0) {
         //remove the item
         updateShoppingCart({
           menuItemId: cartItem.menuItem?.id,
           updateQuantityBy: 0,
-          userId: "b7ae37bf-09b1-4b47-9ce1-c963031d2920",
+          userId: userData.id,
         });
         dispatch(removeFromCart({ cartItem, quantity: 0 }));
     } else {
@@ -30,7 +34,7 @@ const CartSummary = () => {
         updateShoppingCart({
           menuItemId: cartItem.menuItem?.id,
           updateQuantityBy: updateQuantityBy,
-          userId: "b7ae37bf-09b1-4b47-9ce1-c963031d2920",
+          userId: userData.id,
         });
         dispatch(
           updateQuantity({

@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetMenuItemByIdQuery } from "../Apis/menuItemApi";
 import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
 import { MainLoader, MiniLoader } from "../Components/Page/Common";
+import { toastNotify } from "../Helper";
+import { apiResponse, userModel } from "../Interfaces";
+import { RootState } from "../Storage/Redux/store";
 
 
 const MenuItemDetails = () => {
@@ -12,6 +16,9 @@ const MenuItemDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
     const [updateShoppingCart] = useUpdateShoppingCartMutation();
+    const userData: userModel = useSelector(
+      (state: RootState) => state.userAuthStore
+    );
 
     const handleQuantity = (counter: number) => {
         let newQuantity = quantity + counter;
@@ -23,14 +30,22 @@ const MenuItemDetails = () => {
     }
 
     const handleAddingToCart = async () => {
+      if (!userData.id) {
+        navigate("/login");
+        return;
+      }
       
       setIsAddingToCart(true);
   
-      const response =  await updateShoppingCart({
-        userId: "",
+      const response: apiResponse =  await updateShoppingCart({
+        userId: userData.id,
         menuItemId: params.menuItemId,
         updateQuantity: quantity,
       });
+
+      if (response.data && response.data.isSuccess) {
+        toastNotify("成功新增至購物車!");
+      }
   
       // console.log(response);
   

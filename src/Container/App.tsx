@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { useGetShoppingCartByIdQuery } from '../Apis/shoppingCartApi';
 import { Footer, Header } from '../Components/Layout';
-import { Home, MenuItemDetails, NotFound } from '../Pages';
+import { userModel } from '../Interfaces';
+import { AccessDenied, Home, Login, MenuItemDetails, NotFound, Register } from '../Pages';
 import ShoppingCart from '../Pages/ShoppingCart';
 import { setShoppingCart } from '../Storage/Redux/shoppingCartSlice';
+import jwt_decode from "jwt-decode";
+import { setLoggedInUser } from '../Storage/Redux/userAuthSlice';
+import { RootState } from '../Storage/Redux/store';
 
 const App = () => {
 
   const dispatch = useDispatch();
+  const userData = useSelector((state: RootState) => state.userAuthStore);
 
   const { data, isLoading } = useGetShoppingCartByIdQuery(
-    "b7ae37bf-09b1-4b47-9ce1-c963031d2920"
+    userData.id
   );
 
   useEffect(() => {
@@ -22,6 +27,14 @@ const App = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    if (localToken) {
+      const { fullName, id, email, role }: userModel = jwt_decode(localToken);
+      dispatch(setLoggedInUser({ fullName, id, email, role }));
+    }
+  }, []);
+
   return (
     <div className="App">
       <Header />
@@ -29,7 +42,10 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
         <Route path='/menuItemDetails/:menuItemId' element={<MenuItemDetails />} />
-        <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
+        <Route path="/shoppingCart" element={<ShoppingCart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/accessDenied" element={<AccessDenied />} />
       </Routes>    
       <Footer />
     </div>
