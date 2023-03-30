@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useGetShoppingCartByIdQuery } from '../Apis/shoppingCartApi';
 import { Footer, Header } from '../Components/Layout';
 import { userModel } from '../Interfaces';
-import { AccessDenied, Home, Login, MenuItemDetails, NotFound, Register } from '../Pages';
+import { AccessDenied, Home, Login, MenuItemDetails, NotFound, Payment, Register } from '../Pages';
 import ShoppingCart from '../Pages/ShoppingCart';
 import { setShoppingCart } from '../Storage/Redux/shoppingCartSlice';
 import jwt_decode from "jwt-decode";
@@ -46,6 +46,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/accessDenied" element={<AccessDenied />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>    
       <Footer />
     </div>
