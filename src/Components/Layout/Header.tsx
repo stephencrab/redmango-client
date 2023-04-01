@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { cartItemModel, userModel } from "../../Interfaces";
 import { RootState } from "../../Storage/Redux/store";
 import { initialState, setLoggedInUser } from "../../Storage/Redux/userAuthSlice";
+import { SD_Roles } from "../../Utility/SD";
 
 let logo = require("../../Assets/images/mango.png");
 
@@ -47,6 +48,50 @@ const Header = () => {
               首頁
             </NavLink>
           </li>
+          {userData.role == SD_Roles.ADMIN ? (
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Admin Panel
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("order/myorders")}
+                    >
+                      My Orders
+                    </li>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      className="dropdown-item"
+                      onClick={() => navigate("order/allOrders")}
+                    >
+                      All Orders
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Something else here
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    aria-current="page"
+                    to="/order/myorders"
+                  >
+                    Orders
+                  </NavLink>
+                </li>
+              )}
           <li className="nav-item">
             <NavLink
               className="nav-link"
