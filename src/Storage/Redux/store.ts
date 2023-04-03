@@ -6,7 +6,7 @@ import { userAuthReducer } from "./userAuthSlice";
 
 const store = configureStore({
     reducer: {
-        menuItemSore: menuItemReducer,
+        menuItemStore: menuItemReducer,
         shoppingCartStore: shoppingCartReducer,
         userAuthStore: userAuthReducer,
         [menuItemApi.reducerPath]: menuItemApi.reducer,
