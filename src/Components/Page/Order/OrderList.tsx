@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getStatusColor } from "../../../Helper";
 import orderHeaderModel from "../../../Interfaces/orderHeaderModel";
 import { MainLoader } from "../Common";
-import { orderListProps } from "./OrderListProps";
+import { orderListProps } from "./orderListProps";
 
 function OrderList({ isLoading, orderData }: orderListProps) {
     const navigate = useNavigate();
@@ -12,8 +12,8 @@ function OrderList({ isLoading, orderData }: orderListProps) {
     <>
       {isLoading && <MainLoader />}
       {!isLoading && (
-        <div className="table p-5">
-          <h1 className="text-success">Orders List</h1>
+        <div className="table px-5">
+          <h1 className="text-success">訂單</h1>
           <div className="p-2">
             <div className="row border">
               <div className="col-1">ID</div>
