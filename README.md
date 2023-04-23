@@ -1,46 +1,28 @@
-# Getting Started with Create React App
+# RedMango 網路點餐
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend使用React Hooks/Redux, Backend以.NET Core WebAPI, 實作登入/登出/註冊、餐點管理、購物車、訂單處理、分頁、關鍵字搜尋以及串接第三方支付等功能。
 
-## Available Scripts
+# 使用技術
+前端 
+* React with Redux
+* TypeScript
 
-In the project directory, you can run:
+後端 
+* .Net Core 6 Web API
+* Core Identity with JWT
+* Automapper
+* Azure Bob Storage 
 
-### `npm start`
+## Demo
+[Demo網址](https://redmango20230227.azurewebsites.net/) 
+[後端程式碼](https://github.com/stephencrab/RedMangoAPI)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `Admin`
+帳號:admin@test.com \
+密碼:admin123* 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `Customer`
+帳號:test2@gmail.com \
+密碼:test2*
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
